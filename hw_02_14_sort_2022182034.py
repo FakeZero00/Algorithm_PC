@@ -81,7 +81,15 @@ def partition(arr, left, right):
     while True:
         while True:
             p += 1
-            if p > pivot or arr[p] > pivot_data: break
+            if p > right or arr[p] > pivot_data: break
+
+        while True:
+            q -= 1
+            if q < left or arr[q] < pivot_data: break
+
+        if p >= q: break
+
+        
 
 def sort_quick(arr, start, end_inclusive):
     if end_inclusive <= start: return
