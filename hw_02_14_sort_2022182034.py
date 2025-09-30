@@ -65,31 +65,37 @@ def sort_merge(arr, start, end_inclusive):
 
 def partition(arr, left, right):
     middle = (left + right) // 2
-    pivot = middle
     if arr[left] > arr[middle]:
         if arr[middle] > arr[right] : pivot = middle
         elif arr[left] > arr[right] : pivot = right
         else : pivot = left
     else:
-        if(arr[left] > arr[right]) : pivot = left
-        elif(arr[middle] > arr[right]) : pivot = right
+        if arr[left] > arr[right] : pivot = left
+        elif arr[middle] > arr[right] : pivot = right
         else : pivot = middle
     pivot_data = arr[pivot]
+    arr[left], arr[pivot] = arr[pivot], arr[left]
 
     p, q = left, right + 1
 
     while True:
         while True:
             p += 1
+            if q < p : break
             if p > right or arr[p] > pivot_data: break
 
         while True:
             q -= 1
+            if q < p : break
             if q < left or arr[q] < pivot_data: break
 
         if p >= q: break
+        arr[p], arr[q] = arr[q], arr[p]
 
-        
+    if left != q:
+        arr[left], arr[q] = arr[q], arr[left]
+
+    return q
 
 def sort_quick(arr, start, end_inclusive):
     if end_inclusive <= start: return
