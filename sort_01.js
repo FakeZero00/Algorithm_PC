@@ -22,7 +22,13 @@ let cities = [
 ]
 
 console.log(cities)
-// sort here by name
+
+cities.sort((a, b)=>{
+  return a.name.localeCompare(b.name);
+})
 console.log(cities)
-// sort here by x
+
+cities.sort((a, b)=>{
+  return a.x - b.x;
+})
 console.log(cities)
