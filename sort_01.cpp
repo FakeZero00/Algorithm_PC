@@ -32,14 +32,29 @@ City cities[] = {
     City("Tweet", 1253, 403), City("Zilch", 1289, 29),  City("React", 296, 659),  City("Fiche", 787, 278),
 };
 
+bool City_Compare_name_asc(City a, City b)
+{
+    return a.name < b.name;
+}
+
+bool City_Compare_y_asc(City a, City b)
+{
+    return a.y < b.y;
+}
+
 int main(void) 
 {
   int n_cities = sizeof(cities) / sizeof(cities[0]);
   printCities(cities, n_cities);
-  // sort here by name
+  cout << '\n';
+  
+  sort(cities, cities + n_cities, City_Compare_name_asc);
   printCities(cities, n_cities);
-  // sort here by y coordinate
+  cout << '\n';
+  
+  sort(cities, cities + n_cities, City_Compare_y_asc);
   printCities(cities, n_cities);
 
+  system("pause");
   return 0;
 }
