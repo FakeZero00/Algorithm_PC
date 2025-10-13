@@ -32,3 +32,8 @@ cities.sort((a, b)=>{
   return a.x - b.x;
 })
 console.log(cities)
+
+cities.sort((a, b)=>{
+  return b.y - a.y;
+})
+console.log(cities)
