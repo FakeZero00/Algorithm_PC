@@ -5,7 +5,7 @@ class City:
   def __repr__(self):
     return '%s(%3d,%3d)' % (self.name, self.x, self.y)
   def __lt__(self, other):
-      return self.name < other.name
+    return self.y > other.y
 
 cities = [
   City("Clean", 1336, 536),  City("Prosy", 977, 860),
@@ -20,9 +20,12 @@ cities = [
   City("React", 296, 659),   City("Fiche", 787, 278),
 ]
 
+# 원래 상태
 print(cities)
-
+#이름 오름차순 정렬
+print(sorted(cities, key = lambda x : x.name))
+#x 오름차순 정렬
+print(sorted(cities, key = lambda x : x.x))
+#y 내림차순 정렬
 cities.sort()
 print(cities)
-# sort here by x
-print(sorted(cities, key = lambda x : x.x))
