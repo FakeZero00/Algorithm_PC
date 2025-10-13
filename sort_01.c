@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
   const char *name;
@@ -35,12 +36,20 @@ int City_comparator_name_asc(const void *a, const void *b)
     return strcmp(p1->name, p2->name);
 }
 
-int City_comparator_y_asc(const void* a, const void* b)
+int City_comparator_x_asc(const void* a, const void* b)
 {
     City* p1 = (City*)a;
     City* p2 = (City*)b;
 
-    return p1->y - p2->y;
+    return p1->x - p2->x;
+}
+
+int City_comparator_y_desc(const void* a, const void* b)
+{
+    City* p1 = (City*)a;
+    City* p2 = (City*)b;
+
+    return p2->y - p1->y;
 }
 
 int main(void) 
@@ -48,16 +57,19 @@ int main(void)
   const int Width = sizeof(cities[0]);
   const int Count = sizeof(cities) / sizeof(cities[0]);
 
-  City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
+  City_printAll(cities, Count);
   printf("\n");
 
   qsort(cities, Count, Width, City_comparator_name_asc);
-  City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
+  City_printAll(cities, Count);
   printf("\n");
 
-  qsort(cities, Count, Width, City_comparator_y_asc);
-  City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
+  qsort(cities, Count, Width, City_comparator_x_asc);
+  City_printAll(cities, Count);
+  printf("\n");
 
-  system("pause");
+  qsort(cities, Count, Width, City_comparator_y_desc);
+  City_printAll(cities, Count);
+
   return 0;
 }
