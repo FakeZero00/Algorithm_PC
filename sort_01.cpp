@@ -37,9 +37,14 @@ bool City_Compare_name_asc(City a, City b)
     return a.name < b.name;
 }
 
-bool City_Compare_y_asc(City a, City b)
+bool City_Compare_x_asc(City a, City b)
 {
-    return a.y < b.y;
+    return a.x < b.x;
+}
+
+bool City_Compare_y_desc(City a, City b)
+{
+    return a.y > b.y;
 }
 
 int main(void) 
@@ -52,9 +57,12 @@ int main(void)
   printCities(cities, n_cities);
   cout << '\n';
   
-  sort(cities, cities + n_cities, City_Compare_y_asc);
+  sort(cities, cities + n_cities, City_Compare_x_asc);
   printCities(cities, n_cities);
+  cout << '\n';
 
-  system("pause");
+  sort(cities, cities + n_cities, City_Compare_y_desc);
+  printCities(cities, n_cities);
+  cout << '\n';
   return 0;
 }
