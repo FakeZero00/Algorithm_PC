@@ -64,5 +64,7 @@ int main(void)
   sort(cities, cities + n_cities, City_Compare_y_desc);
   printCities(cities, n_cities);
   cout << '\n';
+
+  system("pause");
   return 0;
 }

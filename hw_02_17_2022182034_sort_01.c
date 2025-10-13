@@ -70,6 +70,8 @@ int main(void)
 
   qsort(cities, Count, Width, City_comparator_y_desc);
   City_printAll(cities, Count);
+  printf("\n");
 
+  system("pause");
   return 0;
 }
