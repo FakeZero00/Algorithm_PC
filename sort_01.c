@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
   const char *name;
@@ -26,13 +27,37 @@ void City_printAll(City *p, int count)
   putchar('\n');
 }
 
+int City_comparator_name_asc(const void *a, const void *b)
+{
+    City* p1 = (City*)a;
+    City* p2 = (City*)b;
+
+    return strcmp(p1->name, p2->name);
+}
+
+int City_comparator_y_asc(const void* a, const void* b)
+{
+    City* p1 = (City*)a;
+    City* p2 = (City*)b;
+
+    return p1->y - p2->y;
+}
+
 int main(void) 
 {
+  const int Width = sizeof(cities[0]);
+  const int Count = sizeof(cities) / sizeof(cities[0]);
+
   City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
-  // sort here by name
+  printf("\n");
+
+  qsort(cities, Count, Width, City_comparator_name_asc);
   City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
-  // sort here by y coordinate
+  printf("\n");
+
+  qsort(cities, Count, Width, City_comparator_y_asc);
   City_printAll(cities, sizeof(cities) / sizeof(cities[0]));
 
+  system("pause");
   return 0;
 }
