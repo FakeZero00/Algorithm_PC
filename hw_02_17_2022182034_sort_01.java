@@ -5,17 +5,13 @@
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class sort_01 {
-  public static class City implements Comparable<City> {
+public class hw_02_17_2022182034_sort_01 {
+  public static class City{
     String name; int x, y;
     public City(String name, int x, int y) {
       this.name = name;
       this.x = x;
       this.y = y;
-    }
-    public int compareTo(City other)
-    {
-      return this.name.compareTo(other.name);
     }
     public String toString() {
       return name+'('+x+','+y+')';
@@ -48,6 +44,14 @@ public class sort_01 {
       public int compare(City a, City b)
       {
         return a.x - b.x;
+      }
+    });
+    System.out.println(Arrays.toString(cities));
+
+    Arrays.sort(cities, new Comparator<City>(){
+      public int compare(City a, City b)
+      {
+        return b.y - a.y;
       }
     });
     System.out.println(Arrays.toString(cities));
