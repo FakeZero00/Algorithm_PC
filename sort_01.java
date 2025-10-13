@@ -3,14 +3,19 @@
 //   https://www.onlinegdb.com/
 
 import java.util.Arrays;
+import java.util.Comparator;
 
-public class Main {
-  public static class City {
+public class sort_01 {
+  public static class City implements Comparable<City> {
     String name; int x, y;
     public City(String name, int x, int y) {
       this.name = name;
       this.x = x;
       this.y = y;
+    }
+    public int compareTo(City other)
+    {
+      return this.name.compareTo(other.name);
     }
     public String toString() {
       return name+'('+x+','+y+')';
@@ -30,9 +35,21 @@ public class Main {
   };
   public static void main(String args[]) {
     System.out.println(Arrays.toString(cities));
-    // sort here by name
+    
+    Arrays.sort(cities, new Comparator<City>(){
+      public int compare(City a, City b)
+      {
+        return a.name.compareTo(b.name);
+      }
+    });
     System.out.println(Arrays.toString(cities));
-    // sort here by x coordinate
+    
+    Arrays.sort(cities, new Comparator<City>(){
+      public int compare(City a, City b)
+      {
+        return a.x - b.x;
+      }
+    });
     System.out.println(Arrays.toString(cities));
   }
 }
