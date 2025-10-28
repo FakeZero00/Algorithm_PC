@@ -20,4 +20,23 @@ if __name__ == '__main__':
     build_graph()
 
     start_city_index = 0
-    weights = 
+    global weights, completed
+    weights = heapdict.heapdict()
+    weights[start_city_index] = 0, start_city_index
+    completed = set()
+
+    global mst
+    mst = []
+    while weights:
+        ci, (w, fr) = weights.popitem()
+        completed.add(ci)
+        if(fr != ci): mst.append((fr, ci, w)) #시작 노드가 아니면 mst에 추가
+
+        adjacents = graph[ci]
+        for adj in adjacents:
+            if adj in completed: continue
+            weight = adjacents[adj]
+            print(weights)
+            if adj in weights:
+                w = weights[adj][0]
+            else: weights[adj] = weight, ci #인접한 점이 저장되어 있지 않다면 추가
