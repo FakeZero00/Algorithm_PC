@@ -11,35 +11,35 @@ edges=[
     (12, 21, 395), (12, 22, 442), (13, 21, 170), (14, 18, 451), (14, 23, 318),
     (16, 17, 287), (16, 23, 325), (17, 24, 392), (19, 22, 146), (20, 24, 76)
 ]
+from heapdict import heapdict
 num_vertex = 25
 
-roots = []
-edges = []
-
+g = {i:dict() for i in range(num_vertex)}
+for u, v, w in edges:
+    g[u][v] = w
+    g[v][u] = w
 mst = []
 
 def append(s, e, w):
     if s <= e:
-        edges.append((s,e,w))
+        mst.append((s,e,w))
     else:
-        edges.append((e,s,w))
-    edges.sort(key=lambda e:e[0]*1000+e[1])
-def spanning():
-    return len(mst) >= num_vertex - 1
-def onSameTree(u, v):
-    pass
-def getRoot(v):
-    pass
-def connect(u, v):
-    pass
+        mst.append((e,s,w))
+    mst.sort(key=lambda e:e[0]*1000+e[1])
 
-edges.sort()
+def prim(start):
+    D = heapdict()
+    D[start] = 0, start
+    completed = set()
+    while D:
+        i_to, (weight, i_from) = D.popitem()
+        completed.add(i_to)
+        if i_from != i_to:
+            append(i_from, i_to, weight)
+        for adj_i, adj_w in g[i_to].items():
+            if adj_i in completed: continue
+            if adj_i not in D or adj_w < D[adj_i][0]:
+                D[adj_i] = adj_w, i_to
 
-for s,e,w in edges:
-    if spanning(): break
-    if onSameTree(s, e): continue
-
-    mst.append((s, e, w))
-
+prim(8)
 print(mst)
-
