@@ -73,6 +73,6 @@ def print_path(v, start):
     
 result = dijkstra(12)
 origins = dict(sorted(origins.items()))
+
 for i in range(num_vertex):
     print_path(i, 12)
-print(mst)
