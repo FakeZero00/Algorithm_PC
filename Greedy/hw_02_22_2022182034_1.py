@@ -38,12 +38,11 @@ def connect(u, v):
         uroot, vroot = vroot, uroot
     roots[vroot] = uroot
 
-edges.sort(key = lambda e: e[2])
+edges.sort(key = lambda e : e[2])
 
 for s,e,w in edges:
     if spanning(): break
     if onSameTree(s, e): continue
-
     append(s, e, w)
 
 print(mst)
