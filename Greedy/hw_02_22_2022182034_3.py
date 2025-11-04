@@ -51,23 +51,28 @@ def dijkstra(start):
             if adj_i not in D or wa < D[adj_i][0]:
                 D[adj_i] = wa, i_to
 
-path = []
+path = [[] for _ in range(num_vertex)]
+weight_values = []
 
-def find_root(v):
+def find_root(v, index):
     if v == origins[v]:
-        path.append(v)
+        path[index].append(v)
         return
     else:
-        path.append(v)
-        find_root(origins[v])
+        path[index].append(v)
+        find_root(origins[v], index)
 
-def print_path(v):
-    for to, fr in origins.items():
-            find_root(to)
-            print(path)
-    path.clear()
+def print_path(v, start):
+    find_root(v, v)
+    weight_value = 0
+    for i in range(len(path[v]) - 1):
+        if path[v][i] == start: break
+        weight_value += g[path[v][i]][path[v][i+1]]
+    weight_values.append((v, weight_value))
+    print(f'Vertex {v} : ' + ' -> '.join(map(str, reversed(path[v]))) + f' (Weight: {weight_value})')
     
 result = dijkstra(12)
+origins = dict(sorted(origins.items()))
 for i in range(num_vertex):
-    print_path(i)
+    print_path(i, 12)
 print(mst)
