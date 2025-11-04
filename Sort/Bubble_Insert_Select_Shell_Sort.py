@@ -63,6 +63,14 @@ def sort_shell(arr):
 
     print(f'after : {arr}')
 
+def sort_heap(arr):
+    print('=' * 60)
+    print(f'before: {arr}')
+
+
+
+    print(f'after : {arr}')
+
 def main():
   sort_bubble(array[:])
   sort_insert(array[:])
