@@ -27,19 +27,47 @@ def append(s, e, w):
         mst.append((e,s,w))
     mst.sort(key=lambda e:e[0]*1000+e[1])
 
-def prim(start):
-    D = heapdict()
+origins = dict()
+
+def dijkstra(start):
+    D = heapdict() #key 종착점
     D[start] = 0, start
     completed = set()
+    global origins
+    origins[start] = start
+    current_origin = start
     while D:
         i_to, (weight, i_from) = D.popitem()
         completed.add(i_to)
+        current_origin = i_from
+
         if i_from != i_to:
             append(i_from, i_to, weight)
+            origins[i_to] = current_origin
+
         for adj_i, adj_w in g[i_to].items():
             if adj_i in completed: continue
-            if adj_i not in D or adj_w < D[adj_i][0]:
-                D[adj_i] = adj_w, i_to
+            wa = weight + adj_w
+            if adj_i not in D or wa < D[adj_i][0]:
+                D[adj_i] = wa, i_to
 
-result = prim(8)
+path = []
+
+def find_root(v):
+    if v == origins[v]:
+        path.append(v)
+        return
+    else:
+        path.append(v)
+        find_root(origins[v])
+
+def print_path(v):
+    for to, fr in origins.items():
+            find_root(to)
+            print(path)
+    path.clear()
+    
+result = dijkstra(12)
+for i in range(num_vertex):
+    print_path(i)
 print(mst)
